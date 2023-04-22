@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::fmt;
 #[derive(Debug)]
 pub struct Transitions {
-    rules: HashMap<String, TransitionOutput>,
+    pub rules: HashMap<String, TransitionOutput>,
 }
 
 impl fmt::Display for Transitions {
