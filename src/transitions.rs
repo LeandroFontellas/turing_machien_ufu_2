@@ -27,13 +27,13 @@ impl Transitions {
 
 #[derive(Debug)]
 pub struct TransitionOutput {
-    state: String,
-    symbol: char,
-    direction: char,
+    pub state: String,
+    pub symbol: String,
+    pub direction: String,
 }
 
 impl TransitionOutput {
-    pub fn new(state: String, symbol: char, direction: char) -> Self {
+    pub fn new(state: String, symbol: String, direction: String) -> Self {
         Self {
             state,
             symbol,

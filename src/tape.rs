@@ -2,20 +2,20 @@ use std::fmt;
 
 #[derive(Debug)]
 pub struct Tape {
-    word: String,
-    white_symbol: char,
-    accepted_symbols: Vec<char>,
-    state: String,
-    size: usize,
-    tape: Vec<char>,
-    position: usize,
+    pub word: String,
+    pub white_symbol: char,
+    pub accepted_symbols: Vec<String>,
+    pub state: String,
+    pub size: usize,
+    pub tape: Vec<String>,
+    pub position: usize,
 }
 
 impl Tape {
     pub fn new(
         word: String,
         white_symbol: char,
-        accepted_symbols: Vec<char>,
+        accepted_symbols: Vec<String>,
         state: String,
     ) -> Self {
         let mut new_tape = Self {
@@ -23,30 +23,30 @@ impl Tape {
             white_symbol,
             accepted_symbols,
             state,
-            tape: word.chars().into_iter().collect(),
-            position: 1,
+            tape: word.chars().into_iter().map(|x| x.to_string()).collect(),
+            position: 0,
             size: word.len() + 1,
         };
 
-        new_tape.tape.insert(word.len() - 1, white_symbol);
+        new_tape.tape.insert(word.len(), white_symbol.to_string());
 
         new_tape
     }
 
-    pub fn move_on_tape(&mut self, direction: char, symbol: char) -> bool {
-        let mut direction = direction.to_lowercase();
+    pub fn move_on_tape(&mut self, direction: String, symbol: String) -> bool {
+        let direction = direction.to_lowercase();
 
-        if direction.any(|x| x == 'r') {
+        if direction.contains('r') {
             return Self::move_to_right(self, symbol);
         }
-        if direction.any(|x| x == 'l') {
+        if direction.contains('l') {
             return Self::move_to_left(self, symbol);
         }
 
         false
     }
 
-    fn move_to_right(&mut self, symbol: char) -> bool {
+    fn move_to_right(&mut self, symbol: String) -> bool {
         if self.accepted_symbols.contains(&symbol) {
             self.tape[self.position] = symbol;
             if self.position < self.size {
@@ -58,7 +58,7 @@ impl Tape {
         false
     }
 
-    fn move_to_left(&mut self, symbol: char) -> bool {
+    fn move_to_left(&mut self, symbol: String) -> bool {
         if self.accepted_symbols.contains(&symbol) {
             self.tape[self.position] = symbol;
 
@@ -69,8 +69,12 @@ impl Tape {
         false
     }
 
-    pub fn get_current_symbol(&self) -> char {
-        self.tape[self.position]
+    pub fn get_current_symbol(&self) -> &str {
+        let result = &self.tape[self.position];
+
+        println!("{}", result);
+
+        result
     }
 }
 
@@ -82,7 +86,7 @@ impl fmt::Display for Tape {
             if index == self.position {
                 current_tape.push_str(&self.state);
             }
-            current_tape.push(*value);
+            current_tape.push_str(value);
         }
 
         writeln!(f, "{}", current_tape)

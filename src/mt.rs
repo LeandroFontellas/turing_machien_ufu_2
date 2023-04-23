@@ -2,20 +2,20 @@ use crate::transitions::{TransitionOutput, Transitions};
 use std::fmt;
 #[derive(Debug)]
 pub struct TuringMachine {
-    states: Vec<String>,
-    alphabet: Vec<char>,
-    tape_alphabet: Vec<char>,
-    initial_state: String,
-    final_states: Vec<String>,
-    white_symbol: char,
-    transitions: Transitions,
+    pub states: Vec<String>,
+    pub alphabet: Vec<String>,
+    pub tape_alphabet: Vec<String>,
+    pub initial_state: String,
+    pub final_states: Vec<String>,
+    pub white_symbol: char,
+    pub transitions: Transitions,
 }
 
 impl TuringMachine {
     pub fn new(
         states: Vec<String>,
-        alphabet: Vec<char>,
-        tape_alphabet: Vec<char>,
+        alphabet: Vec<String>,
+        tape_alphabet: Vec<String>,
         initial_state: String,
         final_states: Vec<String>,
         white_symbol: char,
@@ -32,9 +32,9 @@ impl TuringMachine {
         }
     }
 
-    pub fn get_transition(&self, state: &str, symbol: char) -> Option<&TransitionOutput> {
-        let mut state_with_symbol = state.to_string();
-        state_with_symbol.push(symbol);
+    pub fn get_transition(&self, state: &str, symbol: &str) -> Option<&TransitionOutput> {
+        let mut state_with_symbol =  state.to_string();
+        state_with_symbol.push_str(symbol);
         self.transitions.rules.get(&state_with_symbol)
     }
 
