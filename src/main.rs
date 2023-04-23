@@ -40,6 +40,14 @@ fn main() {
                 loop {
                     match turing_machine.get_transition(&tape.state, tape.get_current_symbol()) {
                         Some(transition) => {
+                            println!(
+                                "({},{})->({},{},{})",
+                                tape.state,
+                                tape.get_current_symbol(),
+                                transition.state,
+                                transition.symbol,
+                                transition.direction
+                            );
                             let is_walkable = tape.move_on_tape(
                                 transition.direction.clone(),
                                 transition.symbol.clone(),

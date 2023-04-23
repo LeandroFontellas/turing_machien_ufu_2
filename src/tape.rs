@@ -80,12 +80,10 @@ impl fmt::Display for Tape {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let mut current_tape = String::new();
 
-        for (index, value) in self.tape.iter().enumerate() {
-            if index == self.position {
-                current_tape.push_str(&self.state);
-            }
+        for value in self.tape.iter() {
             current_tape.push_str(value);
         }
+        current_tape.push_str(&self.state);
 
         writeln!(f, "{}", current_tape)
     }
