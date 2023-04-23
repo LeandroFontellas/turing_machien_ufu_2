@@ -30,13 +30,13 @@ fn main() {
                 println!("Digite uma cadeia:");
                 let word: String = read!();
                 tape = Tape::new(
-                    word,
+                    word.clone(),
                     turing_machine.white_symbol,
                     turing_machine.tape_alphabet.clone(),
                     turing_machine.initial_state.clone(),
                 );
 
-                println!("---------------------------");
+                println!("----------Resultado-----------------");
                 loop {
                     match turing_machine.get_transition(&tape.state, tape.get_current_symbol()) {
                         Some(transition) => {

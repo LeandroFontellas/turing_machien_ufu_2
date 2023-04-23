@@ -72,8 +72,6 @@ impl Tape {
     pub fn get_current_symbol(&self) -> &str {
         let result = &self.tape[self.position];
 
-        println!("{}", result);
-
         result
     }
 }
