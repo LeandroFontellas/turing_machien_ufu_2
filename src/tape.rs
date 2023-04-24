@@ -1,5 +1,16 @@
 use std::fmt;
 
+trait CircularIndex {
+    fn circular_index(&self, index: isize) -> usize;
+}
+
+impl<T> CircularIndex for Vec<T> {
+    fn circular_index(&self, index: isize) -> usize {
+        let len = self.len() as isize;
+        (((index % len) + len) % len) as usize
+    }
+}
+
 #[derive(Debug)]
 pub struct Tape {
     pub word: String,
@@ -8,7 +19,7 @@ pub struct Tape {
     pub state: String,
     pub size: usize,
     pub tape: Vec<String>,
-    pub position: usize,
+    pub position: isize,
 }
 
 impl Tape {
@@ -48,8 +59,9 @@ impl Tape {
 
     fn move_to_right(&mut self, symbol: String) -> bool {
         if self.accepted_symbols.contains(&symbol) {
-            self.tape[self.position] = symbol;
-            if self.position < self.size {
+            let index = self.tape.circular_index(self.position as isize);
+            self.tape[index] = symbol;
+            if self.position < self.size as isize {
                 self.position += 1;
                 return true;
             }
@@ -60,7 +72,8 @@ impl Tape {
 
     fn move_to_left(&mut self, symbol: String) -> bool {
         if self.accepted_symbols.contains(&symbol) {
-            self.tape[self.position] = symbol;
+            let index = self.tape.circular_index(self.position as isize);
+            self.tape[index] = symbol;
 
             self.position -= 1;
             return true;
@@ -70,7 +83,8 @@ impl Tape {
     }
 
     pub fn get_current_symbol(&self) -> &str {
-        let result = &self.tape[self.position];
+        let index = self.tape.circular_index(self.position as isize);
+        let result = &self.tape[index];
 
         result
     }
