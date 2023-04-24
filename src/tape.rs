@@ -83,7 +83,6 @@ impl fmt::Display for Tape {
         for value in self.tape.iter() {
             current_tape.push_str(value);
         }
-        current_tape.push_str(&self.state);
 
         writeln!(f, "{}", current_tape)
     }

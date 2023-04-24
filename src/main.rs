@@ -15,7 +15,7 @@ fn main() {
     let mut tape: Tape;
     menu();
     let mut option: u8 = read!();
-    let mut path: String = String::from("mt_basica.txt");
+    let mut path: String = String::from("mt_divisible_by_3.txt");
     // create default mt
     turing_machine = create_mt(path);
 
@@ -40,14 +40,7 @@ fn main() {
                 loop {
                     match turing_machine.get_transition(&tape.state, tape.get_current_symbol()) {
                         Some(transition) => {
-                            println!(
-                                "({},{})->({},{},{})",
-                                tape.state,
-                                tape.get_current_symbol(),
-                                transition.state,
-                                transition.symbol,
-                                transition.direction
-                            );
+                            print!("({},{})->", tape.state, tape.get_current_symbol(),);
                             let is_walkable = tape.move_on_tape(
                                 transition.direction.clone(),
                                 transition.symbol.clone(),
@@ -59,6 +52,10 @@ fn main() {
                                 is_mt_acceptable(&turing_machine, &tape);
                                 break;
                             }
+                            println!(
+                                "({},{},{})",
+                                transition.state, transition.symbol, transition.direction
+                            );
                         }
                         None => {
                             is_mt_acceptable(&turing_machine, &tape);
@@ -66,6 +63,7 @@ fn main() {
                         }
                     }
                 }
+                println!("Fita final: {}", tape);
             }
             _ => {
                 println!("Fim");

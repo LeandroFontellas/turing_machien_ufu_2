@@ -10,3 +10,7 @@ q2;q3 (estados finais)
 $ (simbolo branco)
 (q0,a)->(q1,a,d);(q0,a)->(q1,a,d);(q0,a)->(q1,a,d) (função transição)
 ```
+
+## PS:
+Código precisa de algumas refatorações mas pelo menos é bem claro saber
+onde é preciso refatorar.
