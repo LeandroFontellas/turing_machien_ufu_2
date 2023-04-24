@@ -11,6 +11,13 @@ $ (simbolo branco)
 (q0,a)->(q1,a,d);(q0,a)->(q1,a,d);(q0,a)->(q1,a,d) (função transição)
 ```
 
+## Algoritmo
+A simulação tem duas entidades principais a própria maquina de turing, a fita
+utilizada. Ambas são inicializadas no inicio através da descrição contida nos
+arquivos .txt. A maquina de turing tem a setupla ( Q, Σ, Γ, δ, q0, B, F) onde as fun
+ções de transição ficam armazenadas em uma tabela hash. A fita é onde a MT irá
+trabalhar escrevendo sobre ela e andando com a cabeça para a esquerda ou direita.
+
 ## PS:
 Código precisa de algumas refatorações mas pelo menos é bem claro saber
 onde é preciso refatorar.

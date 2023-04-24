@@ -13,11 +13,12 @@ mod transitions;
 fn main() {
     let mut turing_machine: TuringMachine;
     let mut tape: Tape;
-    menu();
-    let mut option: u8 = read!();
     let mut path: String = String::from("mt_divisible_by_3.txt");
     // create default mt
     turing_machine = create_mt(path);
+    show_mt_details(&turing_machine);
+    menu();
+    let mut option: u8 = read!();
 
     while option != 3 {
         match option {
@@ -25,6 +26,7 @@ fn main() {
                 println!("Digite o nome do arquivo: ");
                 path = read!();
                 turing_machine = create_mt(path);
+                show_mt_details(&turing_machine);
             }
             2 => {
                 println!("Digite uma cadeia:");
@@ -35,7 +37,7 @@ fn main() {
                     turing_machine.tape_alphabet.clone(),
                     turing_machine.initial_state.clone(),
                 );
-
+                println!("Cadeia testada: {}", word);
                 println!("----------Resultado-----------------");
                 loop {
                     match turing_machine.get_transition(&tape.state, tape.get_current_symbol()) {
@@ -90,4 +92,8 @@ fn is_mt_acceptable(turing_machine: &TuringMachine, tape: &Tape) -> () {
     } else {
         println!("CADEIA REJEITADA!")
     }
+}
+
+fn show_mt_details(mt: &TuringMachine) -> () {
+    print!("{}", mt);
 }
