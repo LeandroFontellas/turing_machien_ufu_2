@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::fmt;
 #[derive(Debug)]
 pub struct Transitions {
-    pub rules: HashMap<String, TransitionOutput>,
+    pub rules: HashMap<String, Transition>,
 }
 
 impl fmt::Display for Transitions {
@@ -26,13 +26,13 @@ impl Transitions {
 }
 
 #[derive(Debug)]
-pub struct TransitionOutput {
+pub struct Transition {
     pub state: String,
     pub symbol: String,
     pub direction: String,
 }
 
-impl TransitionOutput {
+impl Transition {
     pub fn new(state: String, symbol: String, direction: String) -> Self {
         Self {
             state,
@@ -42,7 +42,7 @@ impl TransitionOutput {
     }
 }
 
-impl fmt::Display for TransitionOutput {
+impl fmt::Display for Transition {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}:{}:{}", self.state, self.symbol, self.direction)
     }

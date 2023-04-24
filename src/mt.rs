@@ -1,4 +1,4 @@
-use crate::transitions::{TransitionOutput, Transitions};
+use crate::transitions::{Transition, Transitions};
 use std::fmt;
 #[derive(Debug)]
 pub struct TuringMachine {
@@ -32,7 +32,7 @@ impl TuringMachine {
         }
     }
 
-    pub fn get_transition(&self, state: &str, symbol: &str) -> Option<&TransitionOutput> {
+    pub fn get_transition(&self, state: &str, symbol: &str) -> Option<&Transition> {
         let mut state_with_symbol =  state.to_string();
         state_with_symbol.push_str(symbol);
         self.transitions.rules.get(&state_with_symbol)

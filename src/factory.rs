@@ -1,5 +1,5 @@
 use crate::mt::TuringMachine;
-use crate::transitions::{TransitionOutput, Transitions};
+use crate::transitions::{Transition, Transitions};
 use std::fs::File;
 use std::io::{self, BufRead};
 #[derive(Debug)]
@@ -99,7 +99,7 @@ impl Factory {
         result
     }
 
-    fn create_transition_output(val: &str) -> TransitionOutput {
+    fn create_transition_output(val: &str) -> Transition {
         let stripped_value: Vec<&str> = val
             .strip_prefix("(")
             .expect("To have (")
@@ -108,7 +108,7 @@ impl Factory {
             .split(INNER_SPLITTER)
             .collect();
 
-        TransitionOutput::new(
+        Transition::new(
             stripped_value[0].to_string(),
             stripped_value[1].to_string(),
             stripped_value[2].to_string(),
