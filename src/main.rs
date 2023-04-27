@@ -13,7 +13,7 @@ mod transitions;
 fn main() {
     let mut turing_machine: TuringMachine;
     let mut tape: Tape;
-    let mut path: String = String::from("anbncn.txt");
+    let mut path: String = String::from("wcr.txt");
     // create default mt
     turing_machine = create_mt(path);
     show_mt_details(&turing_machine);
