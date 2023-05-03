@@ -32,7 +32,7 @@ impl TuringMachine {
         }
     }
 
-    pub fn get_transition(&self, state: &str, symbol: &str) -> Option<&Transition> {
+    pub fn get_transition(&self, state: &str, symbol: &str) -> Option<&Vec<Transition>> {
         let mut state_with_symbol =  state.to_string();
         state_with_symbol.push_str(symbol);
         self.transitions.rules.get(&state_with_symbol)

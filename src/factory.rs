@@ -71,6 +71,7 @@ impl Factory {
                     transitions
                         .rules
                         .entry(entry)
+                        .and_modify(|x| x.push(Self::strip_transition(splitted_value[1])))
                         .or_insert(Self::create_transition_output(splitted_value[1]));
                 }
                 Ok(TuringMachine::new(
@@ -99,7 +100,11 @@ impl Factory {
         result
     }
 
-    fn create_transition_output(val: &str) -> Transition {
+    fn create_transition_output(val: &str) -> Vec<Transition> {
+        vec![Self::strip_transition(val)]
+    }
+
+    fn strip_transition(val: &str) -> Transition {
         let stripped_value: Vec<&str> = val
             .strip_prefix("(")
             .expect("To have (")

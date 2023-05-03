@@ -88,6 +88,10 @@ impl Tape {
 
         result
     }
+
+    pub fn set_state(&mut self, state: String) {
+        self.state = state;
+    }
 }
 
 impl fmt::Display for Tape {
