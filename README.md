@@ -1,4 +1,4 @@
-## Maquina de turing deterministica
+## Maquina de turing não deterministica de 1 fita
 
 Insira um arquivo nesse formato para utilizar a maquina:
 ```
@@ -17,6 +17,8 @@ utilizada. Ambas são inicializadas no inicio através da descrição contida no
 arquivos .txt. A maquina de turing tem a setupla ( Q, Σ, Γ, δ, q0, B, F) onde as fun
 ções de transição ficam armazenadas em uma tabela hash. A fita é onde a MT irá
 trabalhar escrevendo sobre ela e andando com a cabeça para a esquerda ou direita.
+As funções de transição podem ter saidas diferentes, caracterizando o não deter-
+minismo.
 
 ## PS:
 Código precisa de algumas refatorações mas pelo menos é bem claro saber

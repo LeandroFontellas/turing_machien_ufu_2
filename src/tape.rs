@@ -28,6 +28,7 @@ impl Tape {
         white_symbol: char,
         accepted_symbols: Vec<String>,
         state: String,
+        position: Option<isize>,
     ) -> Self {
         let mut new_tape = Self {
             word: word.clone(),
@@ -35,7 +36,7 @@ impl Tape {
             accepted_symbols,
             state,
             tape: word.chars().into_iter().map(|x| x.to_string()).collect(),
-            position: 0,
+            position: position.unwrap_or(0),
             size: word.len() + 1,
         };
 
