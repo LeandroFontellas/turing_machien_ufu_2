@@ -56,3 +56,17 @@ impl fmt::Display for TuringMachine {
         )
     }
 }
+
+impl Clone for TuringMachine {
+    fn clone(&self) -> TuringMachine {
+        Self {
+            states:self.states.clone(),
+            alphabet:self.alphabet.clone(),
+            tape_alphabet:self.tape_alphabet.clone(),
+            initial_state:self.initial_state.clone(),
+            final_states:self.final_states.clone(),
+            white_symbol: self.white_symbol,
+            transitions:self.transitions.clone(),
+        }
+    }
+}
