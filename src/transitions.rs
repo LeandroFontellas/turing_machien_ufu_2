@@ -20,19 +20,19 @@ impl fmt::Display for Transitions {
 impl Clone for Transitions {
     fn clone(&self) -> Transitions {
         let mut new_hash_map: HashMap<String, Vec<Transition>> = HashMap::new();
-        for (key, value) in &self.rules {
-            new_hash_map
-                .entry(key.to_string())
-                .and_modify(|x| {
-                    for val in value.iter() {
-                        x.push(val.clone());
-                    }
-                })
-                .or_insert({
-                    let mut vec = Vec::new();
-                    vec.push(value[0].clone());
-                    vec
-                });
+        for (key, transitions) in &self.rules {
+            for transition in transitions {
+                new_hash_map
+                    .entry(key.to_string())
+                    .and_modify(|x| {
+                        x.push(transition.clone());
+                    })
+                    .or_insert({
+                        let mut vec = Vec::new();
+                        vec.push(transition.clone());
+                        vec
+                    });
+            }
         }
         Self {
             rules: new_hash_map,

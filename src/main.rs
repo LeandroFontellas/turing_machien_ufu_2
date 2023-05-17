@@ -18,7 +18,7 @@ mod utils;
 fn main() {
     let mut turing_machine: TuringMachine;
     let mut tape: Tape;
-    let mut path: String = String::from("anbncn.txt");
+    let mut path: String = String::from("nondeterministicmt2.txt");
     // create default mt
     turing_machine = create_mt(path);
     show_mt_details(&turing_machine);
@@ -72,12 +72,14 @@ fn execute_non_deterministic_mt(turing_machine: &TuringMachine, tape: &mut Tape,
                 }
 
                 // trabalha em cima de uma copia para nao alterar as definicoes
-                let current_transitions = transitions.clone();
+                let mut current_transitions = transitions.clone();
 
-                if current_transitions.len() > 1 {
-                    for _num in [0..transitions.len()] {
-                        let transition = pick_random_transition_and_remove_it(current_transitions);
+                for _tr in current_transitions.clone() {
+                    let transition = current_transitions
+                        .pop()
+                        .expect("To have at least 1 transition");
 
+                    if current_transitions.len() >= 1 {
                         let new_turing_machine = turing_machine.clone();
 
                         let mut new_tape = Tape::new(
@@ -105,27 +107,21 @@ fn execute_non_deterministic_mt(turing_machine: &TuringMachine, tape: &mut Tape,
                                 &mut new_tape,
                                 n + 1,
                             );
-                        return final_result;
+                    } else if current_transitions.len() == 0 {
+                        let is_walkable = tape
+                            .move_on_tape(transition.direction.clone(), transition.symbol.clone());
+                        tape.set_state(transition.state.clone());
+
+                        if !is_walkable {
+                            return is_mt_acceptable(&turing_machine, &tape);
+                        }
+
+                        // print_transition_result(&transition);
                     }
-                } else if current_transitions.len() == 1 {
-                    let transition = current_transitions
-                        .clone()
-                        .pop()
-                        .expect("to have at least 1 transition");
-
-                    let is_walkable =
-                        tape.move_on_tape(transition.direction.clone(), transition.symbol.clone());
-                    tape.set_state(transition.state.clone());
-
-                    if !is_walkable {
-                        return final_result || is_mt_acceptable(&turing_machine, &tape);
-                    }
-
-                    // print_transition_result(&transition);
                 }
             }
             None => {
-                return final_result || is_mt_acceptable(&turing_machine, &tape);
+                return is_mt_acceptable(&turing_machine, &tape);
             }
         }
     }
@@ -135,7 +131,7 @@ fn execute_non_deterministic_mt(turing_machine: &TuringMachine, tape: &mut Tape,
  * Modifies the transitions vector
  * returns the random picked transition
  */
-fn pick_random_transition_and_remove_it(mut transitions: Vec<Transition>) -> Transition {
+fn pick_random_transition_and_remove_it(transitions: &mut Vec<Transition>) -> Transition {
     let random_number = rand::thread_rng().gen_range(0..transitions.len());
     let result = transitions[random_number].clone();
 
