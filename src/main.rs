@@ -14,7 +14,7 @@ mod utils;
 fn main() {
     let mut turing_machine: TuringMachine;
     let mut tape: Tape;
-    let mut path: String = String::from("cnacmorbnabm.txt");
+    let mut path: String = String::from("xx.txt");
     // create default mt
     turing_machine = create_mt(path);
     show_mt_details(&turing_machine);
@@ -38,11 +38,12 @@ fn main() {
                     turing_machine.tape_alphabet.clone(),
                     turing_machine.initial_state.clone(),
                     None,
+                    None,
                 );
                 println!("Cadeia testada: {}", word);
                 println!("----------Resultado-----------------");
 
-                execute_non_deterministic_mt(&turing_machine, &mut tape, 1);
+                execute_non_deterministic_mt(&turing_machine, &mut tape);
             }
             _ => {
                 println!("Fim");
@@ -54,14 +55,10 @@ fn main() {
     }
 }
 
-fn execute_non_deterministic_mt(turing_machine: &TuringMachine, tape: &mut Tape, n: u32) -> bool {
+fn execute_non_deterministic_mt(turing_machine: &TuringMachine, tape: &mut Tape) -> bool {
     loop {
         match turing_machine.get_transition(&tape.state, tape.get_current_symbol()) {
             Some(transitions) => {
-                if n > 1000 {
-                    return false;
-                }
-
                 // trabalha em cima de uma copia para nao alterar as definicoes
                 let mut current_transitions = transitions.clone();
 
@@ -79,6 +76,7 @@ fn execute_non_deterministic_mt(turing_machine: &TuringMachine, tape: &mut Tape,
                             turing_machine.tape_alphabet.clone(),
                             tape.state.clone(), // estado inicial é o estado atual da ultima fita
                             Some(tape.position), // inicia na posicao da ultima fita
+                            Some(tape.tape.clone()),
                         );
 
                         let is_walkable = new_tape
@@ -90,7 +88,7 @@ fn execute_non_deterministic_mt(turing_machine: &TuringMachine, tape: &mut Tape,
 
                         new_tape.set_state(transition.state.clone());
 
-                        execute_non_deterministic_mt(&new_turing_machine, &mut new_tape, n + 1);
+                        execute_non_deterministic_mt(&new_turing_machine, &mut new_tape);
                     } else if current_transitions.len() == 0 {
                         let is_walkable = tape
                             .move_on_tape(transition.direction.clone(), transition.symbol.clone());

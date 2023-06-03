@@ -29,13 +29,14 @@ impl Tape {
         accepted_symbols: Vec<String>,
         state: String,
         position: Option<isize>,
+        tape: Option<Vec<String>>,
     ) -> Self {
         let mut new_tape = Self {
             word: word.clone(),
             white_symbol,
             accepted_symbols,
             state,
-            tape: word.chars().into_iter().map(|x| x.to_string()).collect(),
+            tape: tape.unwrap_or(word.chars().into_iter().map(|x| x.to_string()).collect()),
             position: position.unwrap_or(0),
             size: word.len() + 1,
         };
