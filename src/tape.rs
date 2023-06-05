@@ -31,19 +31,35 @@ impl Tape {
         position: Option<isize>,
         tape: Option<Vec<String>>,
     ) -> Self {
-        let mut new_tape = Self {
-            word: word.clone(),
-            white_symbol,
-            accepted_symbols,
-            state,
-            tape: tape.unwrap_or(word.chars().into_iter().map(|x| x.to_string()).collect()),
-            position: position.unwrap_or(0),
-            size: word.len() + 1,
-        };
+        match tape {
+            Some(t) => {
+                let new_tape = Self {
+                    word: word.clone(),
+                    white_symbol,
+                    accepted_symbols,
+                    state,
+                    tape: t,
+                    position: position.unwrap_or(0),
+                    size: word.len() + 1,
+                };
+                return new_tape;
+            }
+            None => {
+                let mut new_tape = Self {
+                    word: word.clone(),
+                    white_symbol,
+                    accepted_symbols,
+                    state,
+                    tape: word.chars().into_iter().map(|x| x.to_string()).collect(),
+                    position: position.unwrap_or(0),
+                    size: word.len() + 1,
+                };
 
-        new_tape.tape.insert(word.len(), white_symbol.to_string());
+                new_tape.tape.insert(word.len(), white_symbol.to_string());
 
-        new_tape
+                return new_tape;
+            }
+        }
     }
 
     pub fn move_on_tape(&mut self, direction: String, symbol: String) -> bool {
