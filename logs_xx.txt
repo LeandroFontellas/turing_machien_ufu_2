@@ -71,3 +71,29 @@ Fita final: $YXXYYXX$
 
 😔-CADEIA REJEITADA!
 Fita final: YYXXYYXX$
+
+Cadeia testada: 1101111
+----------Resultado-----------------
+😔-CADEIA REJEITADA!
+Fita final: $Z01111$
+
+😔-CADEIA REJEITADA!
+Fita final: $Y01111$
+
+😔-CADEIA REJEITADA!
+Fita final: $$$ZZ11$
+
+😔-CADEIA REJEITADA!
+Fita final: $$$YZZ1$
+
+😔-CADEIA REJEITADA!
+Fita final: $$$YYZZ$
+
+😔-CADEIA REJEITADA!
+Fita final: $$XYYYZ$
+
+😔-CADEIA REJEITADA!
+Fita final: $YXYYYY$
+
+😔-CADEIA REJEITADA!
+Fita final: YYXYYYY$
