@@ -92,11 +92,11 @@ fn execute_non_deterministic_mt(turing_machine: &TuringMachine, tape: &mut Tape)
                     } else if current_transitions.len() == 0 {
                         let is_walkable = tape
                             .move_on_tape(transition.direction.clone(), transition.symbol.clone());
-                        tape.set_state(transition.state.clone());
 
                         if !is_walkable {
                             return is_mt_acceptable(&turing_machine, &tape);
                         }
+                        tape.set_state(transition.state.clone());
                     }
                 }
             }
