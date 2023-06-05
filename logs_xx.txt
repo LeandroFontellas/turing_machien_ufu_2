@@ -1,0 +1,73 @@
+Cadeia testada: 0000
+----------Resultado-----------------
+😔-CADEIA REJEITADA!
+Fita final: $W00$
+
+🚀-CADEIA ACEITA!
+Fita final: $$WW$
+
+😔-CADEIA REJEITADA!
+Fita final: $$XW$
+
+😔-CADEIA REJEITADA!
+Fita final: $XXX$
+
+😔-CADEIA REJEITADA!
+Fita final: XXXX$
+
+Cadeia testada: 01010101
+----------Resultado-----------------
+😔-CADEIA REJEITADA!
+Fita final: $1010101$
+
+😔-CADEIA REJEITADA!
+Fita final: $$WZ0101$
+
+😔-CADEIA REJEITADA!
+Fita final: $YX10101$
+
+🚀-CADEIA ACEITA!
+Fita final: $$$$WZWZ$
+
+😔-CADEIA REJEITADA!
+Fita final: $YXYX101$
+
+😔-CADEIA REJEITADA!
+Fita final: $$$YXYWZ$
+
+😔-CADEIA REJEITADA!
+Fita final: $YXYXYX1$
+
+😔-CADEIA REJEITADA!
+Fita final: $YXYXYXY$
+
+😔-CADEIA REJEITADA!
+Fita final: XYXYXYXY$
+
+----------Resultado-----------------
+😔-CADEIA REJEITADA!
+Fita final: $Z001100$
+
+😔-CADEIA REJEITADA!
+Fita final: $Y001100$
+
+😔-CADEIA REJEITADA!
+Fita final: $YX01100$
+
+🚀-CADEIA ACEITA!
+Fita final: $$$$ZZWW$
+
+😔-CADEIA REJEITADA!
+Fita final: $$XXYZ00$
+
+😔-CADEIA REJEITADA!
+Fita final: $YXXYY00$
+
+😔-CADEIA REJEITADA!
+Fita final: $YXXYYX0$
+
+😔-CADEIA REJEITADA!
+Fita final: $YXXYYXX$
+
+😔-CADEIA REJEITADA!
+Fita final: YYXXYYXX$
